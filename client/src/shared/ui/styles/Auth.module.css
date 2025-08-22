@@ -1,0 +1,130 @@
+:root {
+  --color-primary: #2563eb;
+  --color-border: #68687b;
+  --color-muted: #67666e;
+  --color-card: #2a2a2a;
+}
+
+.authBody {
+  height: 100vh;
+  margin: 0;
+  display: grid;
+  place-items: center;
+  color: #f9f9f9;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+    sans-serif;
+}
+
+.card {
+  display: flex;
+  /* flex-direction: column; */
+  background: var(--color-card);
+  border-radius: 22px;
+  padding: 6px;
+  width: clamp(300px, 85vw, 500px);
+}
+
+.form {
+  padding: 30px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: padding 0.3s;
+}
+
+.formTitle {
+  text-align: center;
+  margin: 0;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.formSubtitle {
+  text-align: center;
+  margin: 0 0 12px 0;
+  font-size: 14px;
+  color: var(--color-muted);
+  font-weight: 400;
+}
+
+.input {
+  height: 44px;
+  border-radius: 6px;
+  border: 0;
+  color: inherit;
+  font-family: inherit;
+  width: 100%;
+  font-size: 14px;
+  background: #464545;
+  padding: 0 12px;
+  box-sizing: border-box;
+}
+
+.input::placeholder {
+  color: #7f7990;
+}
+
+.submitBtn {
+  height: 44px;
+  border-radius: 6px;
+  border: 0;
+  width: 100%;
+  background: var(--color-primary);
+  font-weight: 500;
+  font-size: 14px;
+  color: inherit;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.submitBtn:hover {
+  opacity: 0.9;
+}
+
+.img {
+  width: 100%;
+  max-width: 25rem;
+  margin-top: 2rem;
+  display: block;
+}
+
+@media (width < 810px) {
+  .img {
+    display: none;
+  }
+}
+
+@media (width >= 485px) {
+  .form {
+    padding-inline: 50px;
+  }
+}
+@media (width >= 500px) {
+  .form {
+    transition: none;
+  }
+}
+@media (width >= 580px) {
+  .card {
+    padding: 6px 0 6px 6px;
+    width: clamp(1px, 90vw, 740px);
+  }
+  .formTitle,
+  .formSubtitle {
+    text-align: left;
+  }
+  .hero {
+    flex: 1 1 40%;
+    width: 50%;
+    min-height: auto;
+  }
+  .form {
+    padding: 60px 30px;
+  }
+}
+@media (width >= 700px) {
+  .hero {
+    flex: 1 1 50%;
+    width: 50%;
+  }
+}
