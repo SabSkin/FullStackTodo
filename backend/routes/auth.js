@@ -1,5 +1,4 @@
 const express = require("express");
-
 const { postNewUser, getUser } = require("../services/auth");
 
 const router = express.Router();
