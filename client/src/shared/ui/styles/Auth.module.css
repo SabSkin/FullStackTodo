@@ -17,7 +17,6 @@
 
 .card {
   display: flex;
-  /* flex-direction: column; */
   background: var(--color-card);
   border-radius: 22px;
   padding: 6px;
@@ -81,11 +80,34 @@
   opacity: 0.9;
 }
 
+.linksWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.link {
+  color: var(--color-muted);
+  font-size: 20px;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.link:hover {
+  color: var(--color-primary);
+  text-decoration: underline;
+}
+
 .img {
   width: 100%;
-  max-width: 25rem;
   margin-top: 2rem;
   display: block;
+}
+
+.imgRecover {
+  width: 300px;
+  margin-left: 5rem;
 }
 
 @media (width < 810px) {

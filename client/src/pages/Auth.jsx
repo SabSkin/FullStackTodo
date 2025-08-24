@@ -1,6 +1,7 @@
 import React from "react";
 import style from "../shared/ui/styles/Auth.module.css";
 import Img from "../shared/ui/img/Auth.svg";
+import { Link } from "react-router-dom";
 
 const Auth = () => {
   const handleSubmit = (e) => {
@@ -22,6 +23,15 @@ const Auth = () => {
           <button type="submit" className={style.submitBtn}>
             Entrance
           </button>
+
+          <div className={style.linksWrapper}>
+            <Link to="/create-account" className={style.link}>
+              Register
+            </Link>
+            <Link to="/recover" className={style.link}>
+              Recover the password
+            </Link>
+          </div>
         </form>
 
         <div className={style.hero}>

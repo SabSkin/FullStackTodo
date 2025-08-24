@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom"; // ✅
+import { useNavigate } from "react-router-dom";
 import styles from "../shared/ui/styles/TodoItem.module.css";
 import Icon from "../shared/ui/img/Icon.svg";
 import Clipboard from "../shared/ui/img/Clipboard.svg";
@@ -10,7 +10,7 @@ import { RiAccountPinBoxLine } from "react-icons/ri";
 const TodoItem = () => {
   const [total, setTotal] = useState(0);
   const [todo, setTodo] = useState(0);
-  const navigate = useNavigate(); // ✅
+  const navigate = useNavigate();
 
   const icons = [
     { icon: <IoIosHome />, label: "Home", path: "/" },
