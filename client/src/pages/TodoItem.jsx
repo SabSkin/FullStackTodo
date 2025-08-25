@@ -2,14 +2,17 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "../shared/ui/styles/TodoItem.module.css";
 import Icon from "../shared/ui/img/Icon.svg";
-import Clipboard from "../shared/ui/img/Clipboard.svg";
 import { LuListTodo } from "react-icons/lu";
 import { IoIosHome } from "react-icons/io";
 import { RiAccountPinBoxLine } from "react-icons/ri";
+import Clipboard from "../widgets/Clipboard";
+import { addTodo } from "../shared/service/AddTodo";
+import { v4 as uuidv4 } from "uuid";
 
 const TodoItem = () => {
   const [total, setTotal] = useState(0);
-  const [todo, setTodo] = useState(0);
+  const [todos, setTodos] = useState(0);
+  const [todoText, setTodoText] = useState("");
   const navigate = useNavigate();
 
   const icons = [
@@ -17,6 +20,17 @@ const TodoItem = () => {
     { icon: <LuListTodo />, label: "Todos", path: "/todos" },
     { icon: <RiAccountPinBoxLine />, label: "Account", path: "/authorization" },
   ];
+
+  const newTodo = {
+    id: uuidv4(),
+    text: todoText,
+    isComplited: false,
+  };
+
+  const handleAddTodo = () => {
+    addTodo(newTodo);
+    setTodoText("");
+  };
 
   return (
     <div className={styles.container}>
@@ -35,8 +49,13 @@ const TodoItem = () => {
       </div>
 
       <div className={styles.inputWrapper}>
-        <input type="text" placeholder="Add a new task" />
-        <button>Add</button>
+        <input
+          type="text"
+          placeholder="Add a new task"
+          value={todoText}
+          onChange={(e) => setTodoText(e.target.value)}
+        />
+        <button onClick={() => handleAddTodo()}>Add</button>
       </div>
 
       <div className={styles.stats}>
@@ -44,19 +63,11 @@ const TodoItem = () => {
           Tasks created <span>{total}</span>
         </p>
         <p>
-          Completed <span>{todo}</span>
+          Completed <span>{todos}</span>
         </p>
       </div>
 
-      <div className={styles.empty}>
-        <hr />
-        <img src={Clipboard} alt="clipboard" />
-        <p>
-          You have no tasks registered yet
-          <br />
-          Create tasks and organize your To-Dos
-        </p>
-      </div>
+      <Clipboard styles={styles.empty} />
     </div>
   );
 };

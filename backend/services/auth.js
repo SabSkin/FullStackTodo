@@ -3,9 +3,8 @@ const path = require("path");
 
 const usersFile = path.join(__dirname, "../data/users.json");
 
-// POST /create-account
 const postNewUser = (req, res) => {
-  const newUser = req.body; // express.json() уже парсит JSON
+  const newUser = req.body;
 
   if (!newUser || !newUser.email || !newUser.password || !newUser.userName) {
     return res.status(400).json({ error: "Invalid form data" });
@@ -32,7 +31,6 @@ const postNewUser = (req, res) => {
   });
 };
 
-// GET /authorization
 const getUser = (req, res) => {
   fs.readFile(usersFile, "utf-8", (err, data) => {
     if (err) return res.status(500).send("Server error");
