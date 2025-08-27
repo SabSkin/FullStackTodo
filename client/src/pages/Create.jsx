@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import style from "../shared/ui/styles/Auth.module.css";
 import Img from "../shared/ui/img/Create.svg";
-import { handleNewUser } from "../shared/service/NewUser";
+import { handleNewUser } from "../shared/api/NewUser";
 
 import { Link } from "react-router-dom";
 

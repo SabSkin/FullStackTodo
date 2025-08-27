@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "../shared/ui/styles/TodoItem.module.css";
 import Icon from "../shared/ui/img/Icon.svg";
@@ -6,13 +6,17 @@ import { LuListTodo } from "react-icons/lu";
 import { IoIosHome } from "react-icons/io";
 import { RiAccountPinBoxLine } from "react-icons/ri";
 import Clipboard from "../widgets/Clipboard";
-import { addTodo } from "../shared/service/AddTodo";
-import { v4 as uuidv4 } from "uuid";
+import { addTodo } from "../shared/api/AddTodo";
+import { getTodo } from "../shared/api/getTodo";
+
+import NewTodos from "./NewTodos";
+import { useTodosStore } from "../shared/store/useTodosStore";
 
 const TodoItem = () => {
   const [total, setTotal] = useState(0);
   const [todos, setTodos] = useState(0);
   const [todoText, setTodoText] = useState("");
+  const { newTodos, addNewTodo } = useTodosStore((state) => state);
   const navigate = useNavigate();
 
   const icons = [
@@ -21,16 +25,26 @@ const TodoItem = () => {
     { icon: <RiAccountPinBoxLine />, label: "Account", path: "/authorization" },
   ];
 
-  const newTodo = {
-    id: uuidv4(),
-    text: todoText,
-    isComplited: false,
-  };
+  const today = new Date();
+  const formattedDate = `${today.getDate()}.${
+    today.getMonth() + 1
+  }.${today.getFullYear()}`;
 
-  const handleAddTodo = () => {
-    addTodo(newTodo);
+  const handleAddTodo = async () => {
+    const todo = {
+      data: formattedDate,
+      text: todoText,
+      isCompleted: false,
+    };
+
+    const savedTodo = await addTodo(todo);
+    if (savedTodo) addNewTodo(savedTodo);
     setTodoText("");
   };
+
+  useEffect(() => {
+    getTodo();
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -67,7 +81,11 @@ const TodoItem = () => {
         </p>
       </div>
 
-      <Clipboard styles={styles.empty} />
+      {newTodos.length === 0 ? (
+        <Clipboard styles={styles.empty} />
+      ) : (
+        <NewTodos />
+      )}
     </div>
   );
 };
